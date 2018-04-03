@@ -4,13 +4,13 @@ dbPort = 7687
 dbUser="neo4j"
 dbPassword = "bioinfo1112"
 ########################
-dataDirectory = "./local-data)/Data"
+dataDirectory = "./local-data)/data"
 #Import directory
 importDirectory = dataDirectory + "/imports"
 #Datasets directory
 datasetsImportDirectory = importDirectory + "/datasets/"
 #Imports 
-entities = ["Disease","Drug","Tissue","Biological_process", "Molecular_function", "Cellular_compartment"]
+entities = ["Disease","Drug","Tissue","Biological_process", "Molecular_function", "Cellular_compartment", "PTM"]
 #Database resources
 PPI_resources = ["IntAct"]
 disease_resources = ["DisGEnet"]

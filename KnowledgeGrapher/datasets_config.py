@@ -1,4 +1,8 @@
+
+dataDirectory = "./local-data)/data"
 mappingFile = dataDirectory + "/ontologies/mapping.tsv"
+importDirectory = dataDirectory + "/imports"
+datasetsImportDirectory = importDirectory + "/datasets/"
 
 #Dataset types
 datasetsDirectory = dataDirectory + "/experiments/"

@@ -2,7 +2,7 @@
 databasesDir = "./local-data)/data/databases/"
 #Databases
 databases = [
-            "Internal",
+            #"Internal",
             "HGNC", 
             "RefSeq", 
             "UniProt", 

@@ -1,8 +1,9 @@
 #Database directory
 databasesDir = "./local-data)/data/databases/"
+databasesImportDir = "databases"
 #Databases
 databases = [
-            #"Internal",
+            "Internal",
             "HGNC", 
             "RefSeq", 
             "UniProt", 

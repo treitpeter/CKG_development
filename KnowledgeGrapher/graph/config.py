@@ -8,6 +8,8 @@ version = 1.0
 dataDirectory = "./local-data)/data"
 #Import directory
 importDirectory = dataDirectory + "/imports"
+#Archive directory
+archiveDirectory = dataDirectory+"/archive"
 #Stats directory
 statsDirectory = importDirectory + "/stats"
 statsFile = "stats.hdf"

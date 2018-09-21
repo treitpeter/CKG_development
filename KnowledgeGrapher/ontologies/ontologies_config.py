@@ -1,5 +1,5 @@
 #Ontologies directory
-ontologiesDirectory = "./local-data)/data/ontologies/"
+ontologiesDirectory = "../../../data/ontologies/"
 ontologiesImportDir = "ontologies"
 
 ontologies = {"Disease": "DO", 

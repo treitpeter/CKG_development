@@ -1,5 +1,5 @@
 
-dataDirectory = "./local-data)/data"
+dataDirectory = "../../../data"
 mappingFile = dataDirectory + "/ontologies/mapping.tsv"
 experimentsImportDirectory = dataDirectory+"/imports/experiments"
 

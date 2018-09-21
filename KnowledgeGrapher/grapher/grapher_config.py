@@ -1,5 +1,5 @@
 ########################
-dataDirectory = "./local-data)/data"
+dataDirectory = "../../../data"
 #Import directory
 importDirectory = dataDirectory + "/imports"
 #Archive directory

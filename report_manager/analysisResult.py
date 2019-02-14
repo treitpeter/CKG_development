@@ -363,12 +363,6 @@ class AnalysisResult:
                     plot.extend(figure.get_violinplot(data[id], identifier, args))
             elif name == "wgcnaplots":
                 for id in data:
-                    if isinstance(id, tuple):
-                        identifier = identifier+"_"+id[0]+"_vs_"+id[1]
-                        figure_title = args['title'] + id[0]+" vs "+id[1]
-                    else:
-                        figure_title = args['title']
-                    args["title"] = figure_title
-                    plot.extend(figure.get_WGCNAPlots(data[id], identifier, args))
+                    plot.extend(figure.get_WGCNAPlots(data[id], identifier))
 
         return plot

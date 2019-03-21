@@ -16,10 +16,10 @@ from apps import basicApp
 
 
 ###Create queries for these
-Users = pd.read_csv('./local-data')
-DataTypes = pd.read_csv('./local-data')
-Tissues = pd.read_csv('./local-data')
-ClinicalVariables = pd.read_csv('./local-data')
+Users = pd.read_csv('./apps/templates/tmp_data/CKG_users.csv')
+DataTypes = pd.read_csv('./apps/templates/tmp_data/CKG_datatypes.csv')
+Tissues = pd.read_csv('./apps/templates/tmp_data/TissueNames.csv')
+ClinicalVariables = pd.read_csv('./apps/templates/tmp_data/clinicalvariables.csv')
 ###Works
 template_cols = pd.read_excel(os.path.join(os.getcwd(), 'apps/templates/ClinicalData_template.xlsx'))
 template_cols = template_cols.columns.tolist()

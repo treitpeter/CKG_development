@@ -3,7 +3,7 @@ Getting Started with the CKG Build
 
 Setting up the Clinical Knowledge Graph is easy.
 
-Assuming you have Python 3 already installed and added to ''PATH'', you can choose to create a virtual environment where all the packages with the specific versions will be installed. To do so, use Virtualenv.
+Assuming you have Python 3 already installed and added to ``PATH``, you can choose to create a virtual environment where all the packages with the specific versions will be installed. To do so, use Virtualenv.
 
 Create a virtual environment
 ----------------------------
@@ -20,7 +20,7 @@ To create a new virtual environment using a costum version of Python, follow the
 
 2. Navigate to the directory where you would like your virtual environment to be (e.g. user's root).
 
-3. Create the virtual environment at the same time you specify the version of Python you wish to use. ''env_name'' is the name of the virtual environment and can be set to anything you like.
+3. Create the virtual environment at the same time you specify the version of Python you wish to use. ``env_name`` is the name of the virtual environment and can be set to anything you like.
 
 .. prompt:: bash $
 
@@ -34,7 +34,9 @@ To create a new virtual environment using a costum version of Python, follow the
 
 After this, the name of the virtual environment will now appear on the left of the prompt:
 
-(env_name) username$
+.. prompt:: bash
+
+	(env_name) username$
 
 If you are finished working in the virtual environment for the moment, you can deactivate it by running:
 
@@ -46,7 +48,7 @@ If you are finished working in the virtual environment for the moment, you can d
 Install python modules with pip
 -------------------------------
 
-All the Python modules neccessary to run the Clinical Knowledge graph can be found in ''requirements.txt''.
+All the Python modules neccessary to run the Clinical Knowledge graph can be found in ``requirements.txt``.
 To install all the packages required, run:
 
 .. prompt:: bash $
@@ -58,14 +60,16 @@ To install all the packages required, run:
 Add CKG to *.bashrc*
 --------------------
 
-In order run the the Clinical Knowledge Graph, add the path to the code to your .bashrc (or .bash_profile):
+In order run the the Clinical Knowledge Graph, add the path to the code to your ``.bashrc`` (or ``.bash_profile``):
 
 1. Open the .bashrc file.
 
 2. Add the following lines to the file and save it:
 
-PYTHONPATH="${PYTHONPATH}:/path/to/folder/CKG/src/"
-export PYTHONPATH
+.. prompt:: bash
+	
+	PYTHONPATH="${PYTHONPATH}:/path/to/folder/CKG/src/"
+	export PYTHONPATH
 
 Notice that the path should always finish with ''/CKG/src/''.
 
@@ -89,10 +93,10 @@ In order to start building the Clinical Knowledge Graph database, you will have 
 	python setup_CKG.py
 	python setup_config_files.py
 
-This will automatically create the ''data'' folder and all subfolders, as well as setup the configuration for the log files where
+This will automatically create the ``data`` folder and all subfolders, as well as setup the configuration for the log files where
 all errors and warnings related to the code will be written to.
 
-Regarding the ''data'', most of the biomedical databases and ontology files will automatically be downloaded during building
+Regarding the ``data``, most of the biomedical databases and ontology files will automatically be downloaded during building
 of the database. However, the following have to be downloaded manually.
 
 - 
@@ -106,7 +110,7 @@ After download, move the files to their respective folders:
 -
 
 
-To build the graph database, run ''builder.py'':
+To build the graph database, run ``builder.py``:
 
 .. prompt:: bash $
 	

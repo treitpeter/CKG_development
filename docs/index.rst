@@ -1,5 +1,5 @@
 .. ClinicalKnowledgeGraph documentation master file, created by
-   sphinx-quickstart on Wed Oct  9 23:03:35 2019.
+   sphinx-quickstart on Wed Nov 27 16:10:34 2019.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
@@ -7,6 +7,11 @@ Welcome to ClinicalKnowledgeGraph's documentation!
 ==================================================
 
 This web page contains the documentation for the Python code using **Sphinx**.
+
+.. toctree::
+   :maxdepth: 1
+
+   README
 
 
 First steps
@@ -16,11 +21,8 @@ Are you new to the Clinical Knowledge Graph? Learn about how to use it and
 all the possibilities.
 
 * **Getting started**:
-  :doc: 'With Neo4j <intro/getting-started-with-neo4j>' |
-  :doc: 'With Clinical Knowledge Graph <intro/getting-started-with-build>'
-.. builder.py + setup_*.py + log (where errors will be recorded)
-.. Alternative: Docker
-
+  :doc:`With Neo4j <intro/getting-started-with-neo4j>` |
+  :doc:`With Clinical Knowledge Graph <intro/getting-started-with-build>`
 
 
 .. toctree::
@@ -32,68 +34,53 @@ all the possibilities.
    intro/getting-started-with-build
 
 
-
-Getting started with the Clinical Knowledge Graph
+Getting started 
 -------------------------------------------------
 
 * **Connecting to the CKG**:
-  :doc:
-.. graphdb_connector
+  :doc:`Connect to DB <getting_started/connect-to-ckg>`
 
 * **Create a new user in the graph database**:
-  :doc: 'Create new user <>'
-.. create_user.py
+  :doc:`Create new user <getting_started/create-new-user>`
 
 * **Create a project in the database**:
-  :doc: 'Project Creation <>'
-.. project creation stuff + queue
+  :doc:`Project Creation <getting_started/create-new-project>`
 
 * **Upload experimental data**:
-  :doc: 'Data Upload <>'
+  :doc:`Data Upload <getting_started/upload-data>`
 
 * **Define data analysis settings**:
-  :doc: 'Clinical data <>' |
-  :doc: 'Proteomics <>' |
-  :doc: 'Whole exome sequencing <>' |
-  :doc: 'Multiomics <>'
+  :doc:`Configuration <getting_started/data-analysis-config>`
 
 * **Access the analysis report**:
-  :doc: 'Dash web app <>' |
-  :doc: 'Jupyter notebook <>'
-.. basicApp.py + intialApp.py + apps_config.py + app.py + index.py
+  :doc:`Access report <getting_started/access-report>`
 
 * **Report notification**:
-  :doc:
-.. utils.py (slack notification)
-
+  :doc:`Notifications <getting_started/notifications>`
 
 
 .. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: Getting started
+  :maxdepth: 2
+  :hidden:
+  :caption: Getting started
 
-   getting_started/connect-to-ckg
-   getting_started/create-new-user
-   getting_started/create-new-project
-   getting_started/upload-data
-   getting_started/data-analysis-config
-   getting_started/access-report
-   getting_started/notifications
-
+  getting_started/connect-to-ckg
+  getting_started/create-new-user
+  getting_started/create-new-project
+  getting_started/upload-data
+  getting_started/data-analysis-config
+  getting_started/access-report
+  getting_started/notifications
 
 
 The project report
 ------------------
 
 * **Generate a project**:
-  :doc:
-.. project.py + project_config.py + report.py + projectApp
+  :doc:`Project <project_report/project-report>`
 
 * **The Tabs**:
-  :doc:
-.. dataset.py + knowledge.py
-
+  :doc:`Project tabs <project_report/project-tabs>`
 
 
 .. toctree::
@@ -105,26 +92,20 @@ The project report
    project_report/project-tabs
 
 
-
 CKG Builder
 -----------
 
 * **Ontology sources and parsers**:
-  :doc:
-.. ontoogies *
+  :doc:`Ontologies <ckg_builder/ontologies>`
 
 * **Biomedical databases and resources**:
-  :doc:
-.. databases *
+  :doc:`Databases <ckg_builder/databases>`
 
 * **Parsing experimental data**:
-  :doc:
-.. experiments *
+  :doc:`Experiments <ckg_builder/experiments>`
 
 * **Building the graph database from one module**:
-  :doc:
-.. builder + buider_utils + mapping + importer + loader
-
+  :doc:`Builder <ckg_builder/graphdb-builder>`
 
 
 .. toctree::
@@ -138,36 +119,27 @@ CKG Builder
    ckg_builder/graphdb-builder
 
 
-
 Advanced featues
 ----------------
 
 * **CKG Statistics**:
-  :doc: 'Imports stats <>' |
-  :doc: 'Graph database stats <>'
-.. honepage* + imports*
+  :doc:`Imports stats <advanced_features/import-statistics>` |
+  :doc:`Graph database stats <advanced_features/graphdb-statistics>`
 
 * **Jupyter notebooks**:
-  :doc: 'Reporting notebooks <>' |
-  :doc: 'Development notebooks <>'
-.. all the notebooks
+  :doc:`Notebooks <advanced_features/ckg-notebooks>`
 
 * **Retrieving data from the CKG**:
-  :doc:
-.. queries folder + cypher.yml
+  :doc:`DB Querying <advanced_features/ckg-queries>`
 
 * **Data Analysis**:
-  :doc:
-.. analyses + analysisResult
+  :doc:`Analysis <advanced_features/standard-analysis>`
 
 * **Visualization**:
-  :doc:
-.. plots
+  :doc:`Plots <advanced_features/visualization-plots>`
 
 * **R interface**:
-  :doc:
-.. notebook + R_packages.R + R2Py.py
-
+  :doc:`R wrapper <advanced_features/R-interface>`
 
 
 .. toctree::
@@ -177,29 +149,24 @@ Advanced featues
 
    advanced_features/import-statistics
    advanced_features/graphdb-statistics
-   advanced_features/reporting-notebooks
-   advanced_features/development-notebooks
+   advanced_features/ckg-notebooks
    advanced_features/ckg-queries
    advanced_features/standard-analysis
    advanced_features/visualization-plots
    advanced_features/R-interface
 
 
-
 System requirements
 -------------------
-.. requirements.txt
 
 * **Mac OS X**:
-  :doc:
+  :doc:`Requirements <system_require/mac-os>`
 
 * **Linux**:
-  :doc:
+  :doc:`Requirements <system_require/linux>`
 
 * **Windows**:
-  :doc:
-.. docker
-
+  :doc:`Requirements <system_require/windows>`
 
 
 .. toctree::
@@ -212,9 +179,6 @@ System requirements
    system_require/windows
 
 
-
-.. _apiref:
-
 API Reference
 -------------
 
@@ -224,19 +188,13 @@ API Reference
    src
 
 
-
 Project Info
-------------
+-------------
 
 .. toctree::
    :maxdepth: 2
 
-   CONTRIBUTING
-   AUTHORS
-   HISTORY
-   BACKERS
-   CODE_OF_CONDUCT
-
+   MANIFEST
 
 
 Index

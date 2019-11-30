@@ -2,7 +2,7 @@ Biomedical Databases Parsers
 =======================================================
 
 cancerGenomeInterpreterParser.py
-----------------------------
+-----------------------------------
 
 .. automodule:: graphdb_builder.databases.parsers.cancerGenomeInterpreterParser
    :members:
@@ -34,7 +34,7 @@ drugBankParser.py
    :show-inheritance:
 
 drugGeneInteractionDBParser.py
-----------------------------
+-----------------------------------
 
 .. automodule:: graphdb_builder.databases.parsers.drugGeneInteractionDBParser
    :members:
@@ -200,4 +200,3 @@ uniprotParser.py
    :members:
    :undoc-members:
    :show-inheritance:
-

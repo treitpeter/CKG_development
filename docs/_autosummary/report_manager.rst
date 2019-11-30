@@ -3,16 +3,9 @@ Report Manager
 
 .. toctree::
 
-   report_manager.analyses
-   report_manager.plots
-
-analysisResult.py
-------------------
-
-.. automodule:: report_manager.analysisResult
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   report_manager.queries
+   report_manager.apps
+   
 
 dataset.py
 --------------
@@ -21,6 +14,7 @@ dataset.py
    :members:
    :undoc-members:
    :show-inheritance:
+
 
 knowledge.py
 --------------
@@ -38,18 +32,18 @@ project.py
    :undoc-members:
    :show-inheritance:
 
-R2Py.py
-------------
-
-.. automodule:: report_manager.R2Py
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 report.py
 --------------
 
 .. automodule:: report_manager.report
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+user.py
+--------------
+
+.. automodule:: report_manager.user
    :members:
    :undoc-members:
    :show-inheritance:
@@ -69,7 +63,3 @@ worker.py
    :members:
    :undoc-members:
    :show-inheritance:
-
-
-
-

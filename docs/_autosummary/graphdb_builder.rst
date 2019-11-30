@@ -6,6 +6,7 @@ Graph Database Builder
    graphdb_builder.ontologies
    graphdb_builder.databases
    graphdb_builder.experiments
+   graphdb_builder.users
    graphdb_builder.builder
 
 builder_utils.py

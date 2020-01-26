@@ -1,77 +1,97 @@
 Create a new project in the database
 ====================================
 
-Preparations
-------------
+The project creation app in the Clinical Knowledge Graph was designed to make the process straightforward and user-friendly.
+To create a project, please follow the steps below.
 
 **Neo4j**
 
 1. Open neo4j desktop
+
 2. Start the database
 
 **Terminal**
 
 1. In one terminal window:
 
-- Start a redis-server:
+	- Activate the virtual environment (if created beforehand)
 
-.. prompt:: bash $
+	.. prompt:: bash $
 
-  redis-server
+		source /path/to/virtualenvironment/bin/activate
 
-2. In another terminal window:
+	- Start a redis-server:
 
-- Navigate to CKG/src/report_manager/
-- Start a celery queue from the report_manager directory:
+	.. prompt:: bash $
 
-.. prompt:: bash $
+		redis-server
 
-	celery -A worker worker -l info
 
-3. In another terminal window:
+.. warning:: If redis-server is not found, install with ``brew install redis`` (Mac) or ``sudo apt-get install redis-server`` (Linux)
 
-- run the index:
+2. In a separate terminal window:
 
-.. prompt:: bash $
+	- Navigate to ``report_manager``
 
-	python index.py
+	.. prompt:: bash $
 
-This will print some warnings, which should be okay
+		cd CKG/src/report_manager
+
+	- Start a celery queue from the report_manager directory:
+
+	.. prompt:: bash $
+
+		celery -A worker worker -l debug
+
+3. In third terminal window:
+
+	- Run the report manager index app:
+
+	.. prompt:: bash $
+
+		cd CKG/src/report_manager
+		python index.py
+
+This will print some warnings, which should be okay.
+
+
+.. warning:: Make sure that your virtual environment is always activated in each terminal window, before running any other command.
 
 **Browser**
 
-1. Go to ``http://localhost:5000/``.
+1. Copy the url ``http://localhost:5000/`` into you web browser.
 
-2. Enter username and password
+2. Enter your username and password
+
+This action will redirect you to the CKG home page app. From here, you can navigate to different applications, including the "Project Creation" app.
+
+
+.. note:: Username and password will be authenticated in the CKG database. For this reason, you should have been created as a new user in the database before this step.
 
 
 Project creation
-----------------
+-------------------
 
-**Browser**
+From the CKG app home page, you can navigate to the project creation app by clicking ``PROJECT CREATION`` or pasting the url ``http://localhost:5000/apps/projectCreationApp`` in the browser.
 
-Navigate to project creation from the front page by pressing the button "PROJECT CREATION"
-or go to ``http://localhost:5000/apps/projectCreation``
+Once you have been redirected, please fill in all the information needed to create a project.
+This includes all the fields marked with ``*`` (mandatory). After all fields are filled in, please revise all the information and press ``Create Project``.
 
-Fill in your project information.
-Press "Create Project" (you will now be able to find your project in the neo4j database)
-Download the "Clinical Data template" and proceed to 'Upload project experimental data'_.
+The page will refresh and once finished, the project identifier will be depicted in front of the ``Project information`` header. Use this identifier to search for data related to your project.
 
+At this stage, and if your project has been successfully created in the database, a new button will appear and the message will instruct you to download a compressed file with the experimental design and clinical data template files. To do so, please press the button "Download Clinical Data template".
 
-Other
------
+Fill in the ExperimentalDesign file with your subject, biological sample and analytical sample identifiers. Please double-check they are correct, this information is essential to map the results correctly in the database.
 
-**Neo4j**
+The ClinicalData file needs to be filled in with all the relevant clinical data and sample information. For more instructions on how to fill in the file, please see `Upload project experimental data`_.
 
-> My Project > Manage > Open Browser > Project [Node Labels]
-You can expand your project information if you click on your project node and next press the < in the bottom of the window
-Here you will find your "id", typically something like "P00000**"
+.. note:: Each field, with the exception of ``Project name``, ``Project Acronym``,``Number of subjects``,  ``Project Description``, ``Starting Date`` and ``Ending Date``, can take multiple values. Select the most appropriate ones for your specific project.
 
-**Browser**
+To check your project in the neo4j database interface:
+	
+	- Open the Neo4j desktop app
+	- Find the graph database in use and click ``Manage``, followed by ``Open Browser`` (opens a new window).
+	- In the new Neo4j window, click on the database symbol (top left corner) and, under ``Node Labels``, click ``Project``
 
-Go to:
-  http://localhost:5000/apps/project/{YOUR_PROJECT_ID}
-
-or go to:
-  http://localhost:5000
-  and select your project from the drop-down menu
+At this point, you should be able to see all the nodes corresponding to projects loaded in the database. 
+To expand your project information, click on your project node and in the bottom of the window press the ``<`` symbol. Here you will find all the attributes of the project, including the project identifier (typically "P000000xx").

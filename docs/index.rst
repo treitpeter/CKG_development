@@ -9,9 +9,9 @@ Welcome to ClinicalKnowledgeGraph's documentation!
 This web page contains the documentation for the Python code using **Sphinx**.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
-   README
+   INTRO
 
 
 First steps
@@ -21,6 +21,7 @@ Are you new to the Clinical Knowledge Graph? Learn about how to use it and
 all the possibilities.
 
 * **Getting started**:
+  :doc:`With Requirements <intro/getting-started-with-requirements>` |
   :doc:`With Neo4j <intro/getting-started-with-neo4j>` |
   :doc:`With Clinical Knowledge Graph <intro/getting-started-with-build>`
 
@@ -130,7 +131,7 @@ Advanced featues
   :doc:`Notebooks <advanced_features/ckg-notebooks>`
 
 * **Retrieving data from the CKG**:
-  :doc:`DB Querying <advanced_features/ckg-queries>`
+  :doc:`DB Querying <advanced_features/ckg-queries>`  >>>>> query_utils.find_queries_involving_nodes + query_utils.read_knowledge_queries()
 
 * **Data Analysis**:
   :doc:`Analysis <advanced_features/standard-analysis>`

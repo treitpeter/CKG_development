@@ -1,40 +1,72 @@
-Getting Started with Neo4j 
-==========================
+Getting Started with Neo4j
+============================
 
 Getting started with Neo4j is easy.
 
-First download the desktop version from https://neo4j.com/download/.
-The community version of the software is free but a sign up is required.
+First download a copy of the Neo4j desktop version from the `Neo4j download page <https://neo4j.com/download/>`_.
+The Community Edition of the software is free but a sign up is required.
 
+Once the file has downloaded, you can install Neo4j by following the instructions automatically opened in the browser.
 
-Create a new Local Graph.
-Install APOC and GRAPH ALGORITHMS.
-Modify Settings: comment the option ``dbms.directories.import=import``.
-Start the Graph.
+Open the Neo4j Desktop App and create a database by clicking "Add graph", followed by "Create a Local Graph", using the password "bioinfo1112".
+
+Now that your database is created:
+
+1. Click "Manage" and then "Plugins". Install "APOC" and "GRAPH ALGORITHMS".
+
+2. Click the tab "Settings", and comment the option ``dbms.directories.import=import`` by adding ``#`` at the beginning of the line.
+
+3. Click "Apply" at the bottom of the window.
+
+4. Start the Graph by clicking the play sign, at the top of the window.
+
+If the database starts and no errors are reported in the tab "Logs", you are redy go to!
 
 
 Add Neo4j graph database to *.bashrc*
--------------------------------------
+----------------------------------------
 
-In order run the graph database, add the path to the database to your .bashrc (or .bash_profile):
+In order run the graph database, add the path to the database to your ``.bashrc`` (or ``.bash_profile``) file.
 
-1. Open the .bashrc file.
+To find out which of the files your machine uses, go to the terminal and type ``more ~/.bash`` and double press the tab key on your keyboard for auto-complete. 
+Immediately below, multiple filenames will be printed, check if among those, is ``.bashrc`` or ``.bash_profile``.
 
-2. Depending on your system, the path may vary. To check the path to the database go to ``Logs`` in the Neo4j Desktop interface.
+.. note:: The bash file can be name ``.bashrc`` or ``.bash_profile``. if your system does not have either, created one of them (e.g. vi ~/.bash_profile).
 
-2. Add the following lines to the file and save it:
+1. Open the ``.bash_profile`` (or ``.bashrc``) with your favourite text editor. In this case, we use the **vi** editor:
+
+.. prompt:: bash $
+	
+	vi ~/.bash_profile
+
+.. note:: To edit with **vi** press ``i`` on your keyboard.
+
+2. Add the path to the previously created Neo4j database to the file:
 
 .. prompt:: bash
 
-	NEO4J_HOME="./local-data Support/Neo4j Desktop/Application/neo4jDatabases/database-identifier/installation-3.5.6/"
+	NEO4J_HOME="./local-data Support/Neo4j Desktop/Application/neo4jDatabases/database-identifier/installation-3.X.X/"
 	export NEO4J_HOME
 
+.. note:: To save and close a file with **vi** editor, press ``Esc`` followed by ``:wq``.
 
-3. Reload .bashrc:
+.. warning:: Depending on your system, the path may vary. To check the path to the database go to ``Logs`` in the Neo4j Desktop interface.
+
+3. Reload the ``.bashrc`` (or ``.bash_profile``)  file:
 
 .. prompt:: bash $
 
 	source ~/.bashrc
+
+or
+
+.. prompt:: bash $
+	
+	source ~/.bash_profile
+
+
+
+
 
 
 

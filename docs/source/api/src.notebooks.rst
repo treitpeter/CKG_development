@@ -1,10 +1,10 @@
-Notebooks
+Notebooks - development
 ==============================================
 
 vis.py
 ---------------------
 
-.. automodule:: notebooks.development.vis
+.. automodule:: src.notebooks.development.vis
    :members:
    :undoc-members:
    :show-inheritance:

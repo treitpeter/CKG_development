@@ -3,12 +3,12 @@ Experimental Data
 
 .. toctree::
 
-   graphdb_builder.experiments.parsers
+   src.graphdb_builder.experiments.parsers
 
-Experiments Controller
+experiments_controller.py
 ----------------------------
 
-.. automodule:: graphdb_builder.experiments.experiments_controller
+.. automodule:: src.graphdb_builder.experiments.experiments_controller
    :members:
    :undoc-members:
    :show-inheritance:

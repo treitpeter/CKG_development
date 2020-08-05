@@ -1,101 +1,98 @@
-Report Dash Apps
+Apps
 =======================================================
 
-
-Basic App
+basicApp.py
 ----------------------------
 
-.. automodule:: report_manager.apps.basicApp
+.. automodule:: src.report_manager.apps.basicApp
    :members:
    :undoc-members:
    :show-inheritance:
 
-Data Upload App
+dataUploadApp.py
 ----------------------------
 
-.. automodule:: report_manager.apps.dataUploadApp
+.. automodule:: src.report_manager.apps.dataUploadApp
    :members:
    :undoc-members:
    :show-inheritance:
 
-Data Upload
+dataUpload.py
 ----------------------------
 
-.. automodule:: report_manager.apps.dataUpload
+.. automodule:: src.report_manager.apps.dataUpload
    :members:
    :undoc-members:
    :show-inheritance:
 
-HomePage Stats App
+homepageApp.py
 ----------------------------
 
-.. automodule:: report_manager.apps.homepageApp
+.. automodule:: src.report_manager.apps.homepageApp
    :members:
    :undoc-members:
    :show-inheritance:
 
-HomePage Stats
+homepageStats.py
 ----------------------------
 
-.. automodule:: report_manager.apps.homepageStats
+.. automodule:: src.report_manager.apps.homepageStats
    :members:
    :undoc-members:
    :show-inheritance:
 
-DB Imports Stats App
+importsApp.py
 ----------------------------
 
-.. automodule:: report_manager.apps.importsApp
+.. automodule:: src.report_manager.apps.importsApp
    :members:
    :undoc-members:
    :show-inheritance:
 
-DB Imports Stats
+imports.py
 ----------------------------
 
-.. automodule:: report_manager.apps.imports
+.. automodule:: src.report_manager.apps.imports
    :members:
    :undoc-members:
    :show-inheritance:
 
-Initial App
+initialApp.py
 ----------------------------
 
-.. automodule:: report_manager.apps.initialApp
+.. automodule:: src.report_manager.apps.initialApp
    :members:
    :undoc-members:
    :show-inheritance:
 
-Login App
+loginApp.py
 ----------------------------
 
-.. automodule:: report_manager.apps.loginApp
+.. automodule:: src.report_manager.apps.loginApp
    :members:
    :undoc-members:
    :show-inheritance:
 
-Project App
+projectApp.py
 ----------------------------
 
-.. automodule:: report_manager.apps.projectApp
+.. automodule:: src.report_manager.apps.projectApp
    :members:
    :undoc-members:
    :show-inheritance:
 
-Project Creation App
+projectCreationApp.py
 ----------------------------
 
-.. automodule:: report_manager.apps.projectCreationApp
+.. automodule:: src.report_manager.apps.projectCreationApp
    :members:
    :undoc-members:
    :show-inheritance:
 
-Project Creation
+projectCreation.py
 ----------------------------
 
-.. automodule:: report_manager.apps.projectCreation
+.. automodule:: src.report_manager.apps.projectCreation
    :members:
    :undoc-members:
    :show-inheritance:
-
-

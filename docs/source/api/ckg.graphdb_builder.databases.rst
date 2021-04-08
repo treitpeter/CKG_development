@@ -1,14 +1,14 @@
-Ontology Databases
+Biomedical Databases
 =======================================================
 
 .. toctree::
 
-   src.graphdb_builder.ontologies.parsers
+   ckg.graphdb_builder.databases.parsers
 
-ontologies_controller.py
+databases_controller.py
 ----------------------------
 
-.. automodule:: src.graphdb_builder.ontologies.ontologies_controller
+.. automodule:: ckg.graphdb_builder.databases.databases_controller
    :members:
    :undoc-members:
    :show-inheritance:

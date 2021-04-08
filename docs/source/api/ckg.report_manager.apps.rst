@@ -4,7 +4,7 @@ Apps
 basicApp.py
 ----------------------------
 
-.. automodule:: src.report_manager.apps.basicApp
+.. automodule:: ckg.report_manager.apps.basicApp
    :members:
    :undoc-members:
    :show-inheritance:
@@ -12,7 +12,7 @@ basicApp.py
 dataUploadApp.py
 ----------------------------
 
-.. automodule:: src.report_manager.apps.dataUploadApp
+.. automodule:: ckg.report_manager.apps.dataUploadApp
    :members:
    :undoc-members:
    :show-inheritance:
@@ -20,7 +20,7 @@ dataUploadApp.py
 dataUpload.py
 ----------------------------
 
-.. automodule:: src.report_manager.apps.dataUpload
+.. automodule:: ckg.report_manager.apps.dataUpload
    :members:
    :undoc-members:
    :show-inheritance:
@@ -28,7 +28,7 @@ dataUpload.py
 homepageApp.py
 ----------------------------
 
-.. automodule:: src.report_manager.apps.homepageApp
+.. automodule:: ckg.report_manager.apps.homepageApp
    :members:
    :undoc-members:
    :show-inheritance:
@@ -36,7 +36,7 @@ homepageApp.py
 homepageStats.py
 ----------------------------
 
-.. automodule:: src.report_manager.apps.homepageStats
+.. automodule:: ckg.report_manager.apps.homepageStats
    :members:
    :undoc-members:
    :show-inheritance:
@@ -44,7 +44,7 @@ homepageStats.py
 importsApp.py
 ----------------------------
 
-.. automodule:: src.report_manager.apps.importsApp
+.. automodule:: ckg.report_manager.apps.importsApp
    :members:
    :undoc-members:
    :show-inheritance:
@@ -52,7 +52,7 @@ importsApp.py
 imports.py
 ----------------------------
 
-.. automodule:: src.report_manager.apps.imports
+.. automodule:: ckg.report_manager.apps.imports
    :members:
    :undoc-members:
    :show-inheritance:
@@ -60,7 +60,7 @@ imports.py
 initialApp.py
 ----------------------------
 
-.. automodule:: src.report_manager.apps.initialApp
+.. automodule:: ckg.report_manager.apps.initialApp
    :members:
    :undoc-members:
    :show-inheritance:
@@ -68,7 +68,7 @@ initialApp.py
 loginApp.py
 ----------------------------
 
-.. automodule:: src.report_manager.apps.loginApp
+.. automodule:: ckg.report_manager.apps.loginApp
    :members:
    :undoc-members:
    :show-inheritance:
@@ -76,7 +76,7 @@ loginApp.py
 projectApp.py
 ----------------------------
 
-.. automodule:: src.report_manager.apps.projectApp
+.. automodule:: ckg.report_manager.apps.projectApp
    :members:
    :undoc-members:
    :show-inheritance:
@@ -84,7 +84,7 @@ projectApp.py
 projectCreationApp.py
 ----------------------------
 
-.. automodule:: src.report_manager.apps.projectCreationApp
+.. automodule:: ckg.report_manager.apps.projectCreationApp
    :members:
    :undoc-members:
    :show-inheritance:
@@ -92,7 +92,7 @@ projectCreationApp.py
 projectCreation.py
 ----------------------------
 
-.. automodule:: src.report_manager.apps.projectCreation
+.. automodule:: ckg.report_manager.apps.projectCreation
    :members:
    :undoc-members:
    :show-inheritance:

@@ -3,13 +3,13 @@ Analytics Core (analytics_core)
 
 .. toctree::
 
-   src.analytics_core.analytics
-   src.analytics_core.viz
+   ckg.analytics_core.analytics
+   ckg.analytics_core.viz
 
 R_wrapper.py
 --------------
 
-.. automodule:: src.analytics_core.R_wrapper
+.. automodule:: ckg.analytics_core.R_wrapper
    :members:
    :undoc-members:
    :show-inheritance:
@@ -17,7 +17,7 @@ R_wrapper.py
 analytics_factory.py
 ----------------------
 
-.. automodule:: src.analytics_core.analytics_factory
+.. automodule:: ckg.analytics_core.analytics_factory
    :members:
    :undoc-members:
    :show-inheritance:
@@ -25,7 +25,7 @@ analytics_factory.py
 utils.py
 --------------
 
-.. automodule:: src.analytics_core.utils
+.. automodule:: ckg.analytics_core.utils
    :members:
    :undoc-members:
    :show-inheritance:

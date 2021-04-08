@@ -4,7 +4,7 @@ CKG Builder
 create_user.py
 ----------------------------
 
-.. automodule:: src.graphdb_builder.builder.create_user
+.. automodule:: ckg.graphdb_builder.builder.create_user
    :members:
    :undoc-members:
    :show-inheritance:
@@ -13,7 +13,7 @@ create_user.py
 importer.py
 ----------------------------
 
-.. automodule:: src.graphdb_builder.builder.importer
+.. automodule:: ckg.graphdb_builder.builder.importer
    :members:
    :undoc-members:
    :show-inheritance:
@@ -21,7 +21,7 @@ importer.py
 loader.py
 ----------------------------
 
-.. automodule:: src.graphdb_builder.builder.loader
+.. automodule:: ckg.graphdb_builder.builder.loader
    :members:
    :undoc-members:
    :show-inheritance:
@@ -29,7 +29,7 @@ loader.py
 builder.py
 ----------------------------
 
-.. automodule:: src.graphdb_builder.builder.builder
+.. automodule:: ckg.graphdb_builder.builder.builder
    :members:
    :undoc-members:
    :show-inheritance:

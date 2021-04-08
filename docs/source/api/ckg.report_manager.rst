@@ -3,12 +3,12 @@ Report Manager (report_manager)
 
 .. toctree::
 
-   src.report_manager.apps
+   ckg.report_manager.apps
 
 app.py
 --------------
 
-.. automodule:: src.report_manager.app
+.. automodule:: ckg.report_manager.app
    :members:
    :undoc-members:
    :show-inheritance:
@@ -16,7 +16,7 @@ app.py
 dataset.py
 --------------
 
-.. automodule:: src.report_manager.dataset
+.. automodule:: ckg.report_manager.dataset
    :members:
    :undoc-members:
    :show-inheritance:
@@ -24,7 +24,7 @@ dataset.py
 index.py
 --------------
 
-.. automodule:: src.report_manager.index
+.. automodule:: ckg.report_manager.index
    :members:
    :undoc-members:
    :show-inheritance:
@@ -33,7 +33,7 @@ index.py
 knowledge.py
 --------------
 
-.. automodule:: src.report_manager.knowledge
+.. automodule:: ckg.report_manager.knowledge
    :members:
    :undoc-members:
    :show-inheritance:
@@ -41,7 +41,7 @@ knowledge.py
 project.py
 --------------
 
-.. automodule:: src.report_manager.project
+.. automodule:: ckg.report_manager.project
    :members:
    :undoc-members:
    :show-inheritance:
@@ -49,7 +49,7 @@ project.py
 report.py
 --------------
 
-.. automodule:: src.report_manager.report
+.. automodule:: ckg.report_manager.report
    :members:
    :undoc-members:
    :show-inheritance:
@@ -57,7 +57,7 @@ report.py
 user.py
 --------------
 
-.. automodule:: src.report_manager.user
+.. automodule:: ckg.report_manager.user
    :members:
    :undoc-members:
    :show-inheritance:
@@ -65,7 +65,7 @@ user.py
 utils.py
 --------------
 
-.. automodule:: src.report_manager.utils
+.. automodule:: ckg.report_manager.utils
    :members:
    :undoc-members:
    :show-inheritance:
@@ -73,7 +73,7 @@ utils.py
 worker.py
 --------------
 
-.. automodule:: src.report_manager.worker
+.. automodule:: ckg.report_manager.worker
    :members:
    :undoc-members:
    :show-inheritance:

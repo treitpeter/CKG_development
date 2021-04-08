@@ -3,16 +3,16 @@ Graph Database Builder (graphdb_builder)
 
 .. toctree::
 
-   src.graphdb_builder.ontologies
-   src.graphdb_builder.databases
-   src.graphdb_builder.experiments
-   src.graphdb_builder.users
-   src.graphdb_builder.builder
+   ckg.graphdb_builder.ontologies
+   ckg.graphdb_builder.databases
+   ckg.graphdb_builder.experiments
+   ckg.graphdb_builder.users
+   ckg.graphdb_builder.builder
 
 builder_utils.py
 ------------------
 
-.. automodule:: src.graphdb_builder.builder_utils
+.. automodule:: ckg.graphdb_builder.builder_utils
    :members:
    :undoc-members:
    :show-inheritance:
@@ -20,7 +20,7 @@ builder_utils.py
 mapping.py
 -------------
 
-.. automodule:: src.graphdb_builder.mapping
+.. automodule:: ckg.graphdb_builder.mapping
    :members:
    :undoc-members:
    :show-inheritance:

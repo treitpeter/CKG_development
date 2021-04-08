@@ -4,7 +4,7 @@ Analytics
 analytics.py
 --------------
 
-.. automodule:: src.analytics_core.analytics.analytics
+.. automodule:: ckg.analytics_core.analytics.analytics
    :members:
    :undoc-members:
    :show-inheritance:
@@ -12,7 +12,7 @@ analytics.py
 wgcnaAnalysis.py
 ----------------------
 
-.. automodule:: src.analytics_core.analytics.wgcnaAnalysis
+.. automodule:: ckg.analytics_core.analytics.wgcnaAnalysis
    :members:
    :undoc-members:
    :show-inheritance:
@@ -20,7 +20,7 @@ wgcnaAnalysis.py
 kaplan_meierAnalysis.py
 -------------------------
 
-.. automodule:: src.analytics_core.analytics.kaplan_meierAnalysis
+.. automodule:: ckg.analytics_core.analytics.kaplan_meierAnalysis
    :members:
    :undoc-members:
    :show-inheritance:

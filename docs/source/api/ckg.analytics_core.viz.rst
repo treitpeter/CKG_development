@@ -4,7 +4,7 @@ Viz
 viz.py
 --------------
 
-.. automodule:: src.analytics_core.viz.viz
+.. automodule:: ckg.analytics_core.viz.viz
    :members:
    :undoc-members:
    :show-inheritance:
@@ -12,7 +12,7 @@ viz.py
 wgcnaFigures.py
 ------------------
 
-.. automodule:: src.analytics_core.viz.wgcnaFigures
+.. automodule:: ckg.analytics_core.viz.wgcnaFigures
    :members:
    :undoc-members:
    :show-inheritance:
@@ -20,7 +20,7 @@ wgcnaFigures.py
 Dendrogram.py
 ----------------
 
-.. automodule:: src.analytics_core.viz.Dendrogram
+.. automodule:: ckg.analytics_core.viz.Dendrogram
    :members:
    :undoc-members:
    :show-inheritance:
@@ -28,7 +28,7 @@ Dendrogram.py
 color_list.py
 ----------------
 
-.. automodule:: src.analytics_core.viz.color_list
+.. automodule:: ckg.analytics_core.viz.color_list
    :members:
    :undoc-members:
    :show-inheritance:

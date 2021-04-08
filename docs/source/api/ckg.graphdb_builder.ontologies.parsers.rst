@@ -4,7 +4,7 @@ Ontologies Parsers
 efoParser.py
 ----------------------------
 
-.. automodule:: src.graphdb_builder.ontologies.parsers.efoParser
+.. automodule:: ckg.graphdb_builder.ontologies.parsers.efoParser
    :members:
    :undoc-members:
    :show-inheritance:
@@ -12,7 +12,7 @@ efoParser.py
 icdParser.py
 ----------------------------
 
-.. automodule:: src.graphdb_builder.ontologies.parsers.icdParser
+.. automodule:: ckg.graphdb_builder.ontologies.parsers.icdParser
    :members:
    :undoc-members:
    :show-inheritance:
@@ -20,7 +20,7 @@ icdParser.py
 oboParser.py
 ----------------------------
 
-.. automodule:: src.graphdb_builder.ontologies.parsers.oboParser
+.. automodule:: ckg.graphdb_builder.ontologies.parsers.oboParser
    :members:
    :undoc-members:
    :show-inheritance:
@@ -28,7 +28,7 @@ oboParser.py
 reflectParser.py
 ----------------------------
 
-.. automodule:: src.graphdb_builder.ontologies.parsers.reflectParser
+.. automodule:: ckg.graphdb_builder.ontologies.parsers.reflectParser
    :members:
    :undoc-members:
    :show-inheritance:
@@ -36,7 +36,7 @@ reflectParser.py
 snomedParser.py
 ----------------------------
 
-.. automodule:: src.graphdb_builder.ontologies.parsers.snomedParser
+.. automodule:: ckg.graphdb_builder.ontologies.parsers.snomedParser
    :members:
    :undoc-members:
    :show-inheritance:

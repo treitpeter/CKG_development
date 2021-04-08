@@ -4,7 +4,7 @@ Experimental Data Parsers
 clinicalParser.py
 ----------------------------
 
-.. automodule:: src.graphdb_builder.experiments.parsers.clinicalParser
+.. automodule:: ckg.graphdb_builder.experiments.parsers.clinicalParser
    :members:
    :undoc-members:
    :show-inheritance:
@@ -12,7 +12,7 @@ clinicalParser.py
 proteomicsParser.py
 ----------------------------
 
-.. automodule:: src.graphdb_builder.experiments.parsers.proteomicsParser
+.. automodule:: ckg.graphdb_builder.experiments.parsers.proteomicsParser
    :members:
    :undoc-members:
    :show-inheritance:
@@ -20,7 +20,7 @@ proteomicsParser.py
 wesParser.py
 ----------------------------
 
-.. automodule:: src.graphdb_builder.experiments.parsers.wesParser
+.. automodule:: ckg.graphdb_builder.experiments.parsers.wesParser
    :members:
    :undoc-members:
    :show-inheritance:

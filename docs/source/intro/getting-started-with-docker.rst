@@ -55,11 +55,13 @@ To run the Docker, simply:
 For instance:
 
 `Windows 10`:
+
 .. code-block:: bash
 
 	$ docker run -d --name ckgapp -p 7474:7474 -p 7687:7687 -p 8090:8090 -p 8050:8050 -v ./local-data -v ./local-data -v ./local-data -v ./local-data docker-ckg:latest
 
 `Unix`:
+
 .. code-block:: bash
 
 	$ docker run -d --name ckgapp -p 7474:7474 -p 7687:7687 -p 8090:8090 -p 8050:8050 -v ./local-data -v ./local-data -v ./local-data -v ./local-data docker-ckg:latest

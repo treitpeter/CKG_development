@@ -4,35 +4,46 @@ from setuptools.command.develop import develop
 from setuptools.command.install import install
 from subprocess import check_call
 import ckg.init
+import os
 
-
-with open("README.rst", "r") as fh:
-    long_description = fh.read()
+# Check if README.md exists, otherwise fallback
+if os.path.exists("README.md"):
+    with open("README.md", "r") as fh:
+        long_description = fh.read()
+    long_description_content_type = 'text/markdown'
+else:
+    long_description = "Clinical Knowledge Graph"
+    long_description_content_type = 'text/plain'
 
 class PreInstallCommand(install):
     """Pre-installation for install mode."""
     def run(self):
-        check_call("pip install -r requirements.txt".split())
-        ckg.init.installer_script()
+        # Use modern requirements if available
+        req_file = "requirements_modern.txt" if os.path.exists("requirements_modern.txt") else "requirements.txt"
+        if os.path.exists(req_file):
+            check_call(f"pip install -r {req_file}".split())
+        # ckg.init.installer_script() # clean this up?
         install.run(self)
-        
+
 class PreDevelopCommand(develop):
     """Pre-installation for install mode."""
     def run(self):
-        check_call("pip install -r requirements.txt".split())
-        ckg.init.installer_script()
+        req_file = "requirements_modern.txt" if os.path.exists("requirements_modern.txt") else "requirements.txt"
+        if os.path.exists(req_file):
+            check_call(f"pip install -r {req_file}".split())
+        # ckg.init.installer_script()
         develop.run(self)
 
 
 setuptools.setup(
-    name="CKG", # Replace with your own username
-    version="1.0.0",
-    author="Alberto Santos Delgado",
+    name="CKG", 
+    version="2.0.0",
+    author="Alberto Santos Delgado, Peter, Gemini",
     author_email="alberto.santos@sund.ku.dk",
-    description="A Python project that allows you to analyse proteomics and clinical data, and integrate and mine knowledge from multiple biomedical databases widely used nowadays.",
+    description="Clinical Knowledge Graph (Clemini Edition) - Modernized for Python 3.10+ and Neo4j 5.x",
     long_description=long_description,
-    long_description_content_type='text/x-rst',
-    url="https://github.com/MannLabs/CKG",
+    long_description_content_type=long_description_content_type,
+    url="https://github.com/treitpeter/CKG",
     packages=setuptools.find_packages(),
     cmdclass={
         'develop': PreDevelopCommand,

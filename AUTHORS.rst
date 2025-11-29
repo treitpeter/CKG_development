@@ -2,6 +2,9 @@ Authors
 -------
 
 * Alberto Santos Delgado
-* Peter
-* Claude
+* Ana Rita Colaco
+* Annelaura Bach Nielsen
+* Max Strauss
+* Peter V. Treit
+* Claude Code
 * Gemini

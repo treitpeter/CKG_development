@@ -1,29 +1,72 @@
-// 1. Project Data Overview
-MATCH (p:Project)-[:HAS_ENROLLED]->(s:Subject)<-[:BELONGS_TO_SUBJECT]-(bs:Biological_sample) RETURN p.name as Project, count(distinct s) as Subjects, count(distinct bs) as BiologicalSamples;
+// =============================================================
+// VISUAL NETWORK QUERIES (Run these to see Graphs!)
+// =============================================================
 
-// 2. Top 10 Most Abundant Proteins
-MATCH (p:Project {name: "DIA-NN Proteomics Demo"})-[:HAS_ENROLLED]->(s:Subject)<-[:BELONGS_TO_SUBJECT]-(bs:Biological_sample)-[:SPLITTED_INTO]->(as:Analytical_sample)-[q:HAS_QUANTIFIED_PROTEIN]->(prot:Protein) RETURN prot.name as Protein, avg(q.value) as AvgIntensity ORDER BY AvgIntensity DESC LIMIT 10;
+// 1. Local Neighborhood of Top Protein (The "Hairball")
+// Visualize the top abundant protein and its direct interaction partners.
+MATCH (p:Project {name: "DIA-NN Proteomics Demo"})-[:HAS_ENROLLED]->(s:Subject)<-[:BELONGS_TO_SUBJECT]-(bs:Biological_sample)-[:SPLITTED_INTO]->(as:Analytical_sample)-[q:HAS_QUANTIFIED_PROTEIN]->(prot:Protein)
+WITH prot, avg(q.value) as intensity ORDER BY intensity DESC LIMIT 1
+MATCH (prot)-[r:COMPILED_INTERACTS_WITH]-(partner)
+RETURN prot, r, partner LIMIT 50;
 
-// 3. Hub Proteins (Degree Centrality)
-MATCH (p:Project {name: "DIA-NN Proteomics Demo"})-[:HAS_ENROLLED]->(s:Subject)<-[:BELONGS_TO_SUBJECT]-(bs:Biological_sample)-[:SPLITTED_INTO]->(as:Analytical_sample)-[:HAS_QUANTIFIED_PROTEIN]->(prot:Protein) WITH DISTINCT prot MATCH (prot)-[r:COMPILED_INTERACTS_WITH]-(other) RETURN prot.name as Protein, count(other) as Degree ORDER BY Degree DESC LIMIT 10;
+// 2. Shortest Path Visualization (The "Bridge")
+// See exactly how two proteins are connected.
+MATCH (p1:Protein {name: "ALB"}), (p2:Protein {name: "HBB"}),
+p = shortestPath((p1)-[:COMPILED_INTERACTS_WITH*..4]-(p2))
+RETURN p;
 
-// 4. Protein Communities (Shared Neighbors)
-MATCH (p1:Protein)-[:COMPILED_INTERACTS_WITH]->(common)<-[:COMPILED_INTERACTS_WITH]-(p2:Protein) WHERE id(p1) < id(p2) WITH p1, p2, count(common) as CommonNeighbors WHERE CommonNeighbors > 5 RETURN p1.name, p2.name, CommonNeighbors ORDER BY CommonNeighbors DESC LIMIT 10;
+// 3. Protein Complex Visualization (The "Clique")
+// See a dense cluster of interacting proteins.
+MATCH (p:Protein)-[r:COMPILED_INTERACTS_WITH]-(neighbor)
+WITH p, collect(neighbor) as neighbors, count(neighbor) as degree
+WHERE degree > 10
+MATCH (p)-[r]-(neighbor)
+WHERE neighbor IN neighbors
+RETURN p, r, neighbor LIMIT 50;
 
-// 5. Pathway Enrichment (Reactome)
-MATCH (p:Project {name: "DIA-NN Proteomics Demo"})-[:HAS_ENROLLED]->(s:Subject)<-[:BELONGS_TO_SUBJECT]-(bs:Biological_sample)-[:SPLITTED_INTO]->(as:Analytical_sample)-[:HAS_QUANTIFIED_PROTEIN]->(prot:Protein) MATCH (prot)-[:ANNOTATED_IN_PATHWAY]->(pw:Pathway) RETURN pw.name as Pathway, count(distinct prot) as ProteinCount ORDER BY ProteinCount DESC LIMIT 15;
+// 4. Project Data Structure (The "Schema")
+// Visualize how your project connects to subjects and samples.
+MATCH (p:Project {name: "DIA-NN Proteomics Demo"})-[r1]->(s:Subject)<-[r2]-(bs:Biological_sample)-[r3]->(as:Analytical_sample)
+RETURN p, r1, s, r2, bs, r3, as LIMIT 100;
 
-// 6. Disease Associations
-MATCH (p:Project {name: "DIA-NN Proteomics Demo"})-[:HAS_ENROLLED]->(s:Subject)<-[:BELONGS_TO_SUBJECT]-(bs:Biological_sample)-[:SPLITTED_INTO]->(as:Analytical_sample)-[:HAS_QUANTIFIED_PROTEIN]->(prot:Protein) MATCH (prot)-[:ASSOCIATED_WITH]->(d:Disease) RETURN d.name as Disease, count(distinct prot) as ProteinCount ORDER BY ProteinCount DESC LIMIT 10;
+// 5. Common Function Cluster (The "Module")
+// Visualize proteins that all participate in the same biological process.
+MATCH (p:Project {name: "DIA-NN Proteomics Demo"})-[:HAS_ENROLLED]->()<-[:BELONGS_TO_SUBJECT]-()-[:SPLITTED_INTO]->()-[:HAS_QUANTIFIED_PROTEIN]->(prot:Protein)
+MATCH (prot)-[r:ASSOCIATED_WITH]->(go:Biological_process)
+WITH go, collect(prot) as proteins, count(prot) as count
+ORDER BY count DESC LIMIT 1
+MATCH (go)<-[r2]-(p)
+WHERE p IN proteins
+RETURN go, r2, p;
 
-// 7. Shortest Path between Two Proteins (Example: ALB and HBB)
-MATCH (p1:Protein {name: "ALB"}), (p2:Protein {name: "HBB"}) MATCH path = shortestPath((p1)-[:COMPILED_INTERACTS_WITH*..4]-(p2)) RETURN path;
+// 6. Shared Interaction Partners (The "Triangle")
+// Visualize proteins that share a common neighbor.
+MATCH (p1:Protein)-[r1:COMPILED_INTERACTS_WITH]->(common)<-[r2:COMPILED_INTERACTS_WITH]-(p2:Protein)
+WHERE p1.name = "ALB"
+RETURN p1, r1, common, r2, p2 LIMIT 20;
 
-// 8. GO Biological Process Enrichment
-MATCH (p:Project {name: "DIA-NN Proteomics Demo"})-[:HAS_ENROLLED]->(s:Subject)<-[:BELONGS_TO_SUBJECT]-(bs:Biological_sample)-[:SPLITTED_INTO]->(as:Analytical_sample)-[:HAS_QUANTIFIED_PROTEIN]->(prot:Protein) MATCH (prot)-[:ASSOCIATED_WITH]->(go:Biological_process) RETURN go.name as Process, count(distinct prot) as Count ORDER BY Count DESC LIMIT 15;
+// 7. Experiment vs. Knowledge (The "Context")
+// Visualize which of your experimental proteins interact with a specific known protein (e.g. TP53).
+MATCH (p:Project {name: "DIA-NN Proteomics Demo"})-[:HAS_ENROLLED]->()<-[:BELONGS_TO_SUBJECT]-()-[:SPLITTED_INTO]->()-[:HAS_QUANTIFIED_PROTEIN]->(my_prot:Protein)
+MATCH (my_prot)-[r:COMPILED_INTERACTS_WITH]-(target:Protein {name: "TP53"})
+RETURN my_prot, r, target;
 
-// 9. Bridge Proteins
-MATCH (a:Protein)-[:COMPILED_INTERACTS_WITH]->(bridge:Protein)-[:COMPILED_INTERACTS_WITH]->(b:Protein) WHERE NOT (a)-[:COMPILED_INTERACTS_WITH]-(b) RETURN bridge.name as BridgeProtein, count(distinct a) as Connections ORDER BY Connections DESC LIMIT 10;
+// 8. Disease Subgraph (The "Disease Network")
+// Visualize proteins in your data linked to a specific disease.
+MATCH (p:Project {name: "DIA-NN Proteomics Demo"})-[:HAS_ENROLLED]->()<-[:BELONGS_TO_SUBJECT]-()-[:SPLITTED_INTO]->()-[:HAS_QUANTIFIED_PROTEIN]->(prot:Protein)
+MATCH (prot)-[r:ASSOCIATED_WITH]->(d:Disease {name: "Alzheimer's disease"})
+RETURN prot, r, d;
 
-// 10. Experiment-Specific Subgraph
-MATCH (p:Project {name: "DIA-NN Proteomics Demo"})-[:HAS_ENROLLED]->(s:Subject)<-[:BELONGS_TO_SUBJECT]-(bs:Biological_sample)-[:SPLITTED_INTO]->(as:Analytical_sample)-[:HAS_QUANTIFIED_PROTEIN]->(prot:Protein) WITH collect(distinct prot) as my_proteins MATCH (p1)-[r:COMPILED_INTERACTS_WITH]->(p2) WHERE p1 IN my_proteins AND p2 IN my_proteins RETURN p1, r, p2 LIMIT 50;
+// 9. Strongest Interactions Only (The "Skeleton")
+// Visualize only the highest confidence interactions (>0.9).
+MATCH (p:Project {name: "DIA-NN Proteomics Demo"})-[:HAS_ENROLLED]->()<-[:BELONGS_TO_SUBJECT]-()-[:SPLITTED_INTO]->()-[:HAS_QUANTIFIED_PROTEIN]->(prot:Protein)
+MATCH (prot)-[r:COMPILED_INTERACTS_WITH]-(partner)
+WHERE r.score > 0.9
+RETURN prot, r, partner LIMIT 50;
+
+// 10. The "Butterfly" (Hub and Spokes)
+// Visualize a protein and its exclusive connections in this dataset.
+MATCH (p:Project {name: "DIA-NN Proteomics Demo"})-[:HAS_ENROLLED]->()<-[:BELONGS_TO_SUBJECT]-()-[:SPLITTED_INTO]->()-[:HAS_QUANTIFIED_PROTEIN]->(prot:Protein)
+WITH prot LIMIT 1
+MATCH (prot)-[r]-(connected)
+RETURN prot, r, connected;

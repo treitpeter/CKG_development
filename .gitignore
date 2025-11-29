@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# Data and Binaries (handled by install.sh or pre-populated)
+data/
+neo4j/
+redis/
+logs/
+log/
+.DS_Store
+
+# IDE and other generated files
+.idea/
+.vscode/
+*.swp
+*.swo
+EOF

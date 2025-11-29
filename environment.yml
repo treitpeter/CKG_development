@@ -1,0 +1,65 @@
+# CKG Modern Environment
+# Usage: conda env create -f environment.yml
+# Then: conda activate ckg2026
+
+name: ckg2026
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.11
+  - pip>=23.0
+
+  # Core scientific stack
+  - pandas>=2.1
+  - numpy>=1.26,<2.0
+  - scipy>=1.11
+  - scikit-learn>=1.3
+  - statsmodels>=0.14
+
+  # Visualization
+  - matplotlib>=3.8
+  - plotly>=5.18
+
+  # Network analysis
+  - networkx>=3.2
+
+  # Data formats
+  - h5py>=3.10
+  - pytables>=3.9
+  - openpyxl>=3.1
+  - xlrd>=2.0
+  - pyyaml>=6.0
+  - lxml>=4.9
+
+  # Jupyter
+  - jupyter
+  - ipykernel
+
+  # Other
+  - requests>=2.31
+  - beautifulsoup4>=4.12
+  - tqdm
+  - psutil
+
+  # Pip-only packages
+  - pip:
+    - neo4j>=5.14.0
+    - Flask>=3.0.0
+    - dash>=2.14.0
+    - dash-cytoscape>=0.3.0
+    - celery>=5.3.0
+    - redis>=5.0.0
+    - umap-learn>=0.5.0
+    - pingouin>=0.5.0
+    - python-louvain>=0.16
+    - lifelines>=0.27.0
+    - gseapy>=1.0.0
+    - biopython>=1.81
+    - obonet>=1.0.0
+    - wordcloud>=1.9.0
+    - kaleido>=0.2.1
+    - passlib>=1.7.4
+    - bcrypt>=4.1.0
+    - natsort>=8.4.0

@@ -1,4 +1,4 @@
-# alphaCKG (Gemini Edition)
+# alphaCKG (Clemini Edition)
 
 **Modernized Clinical Knowledge Graph**
 Updated for Python 3.10+, Neo4j 5.x, and "Batteries Included" ease of use.
@@ -21,18 +21,23 @@ This version is pre-packaged with all required databases and binaries for the Ma
 ./start.sh start
 ```
 *Services started:*
-- **Web App**: http://localhost:5000
-- **Neo4j Browser**: http://localhost:7474
+- **Web App**: http://localhost:5000 (or `http://<HOSTNAME>:5000`)
+- **Neo4j Browser**: http://localhost:7474 (or `http://<HOSTNAME>:7474`)
   - User: `neo4j`
   - Password: `ckg_password`
 
 ## 📂 Project Structure
-- `ckg/`: Core source code
-- `data/`: Pre-loaded databases and ontologies
-- `neo4j/`: Pre-configured Neo4j 5.x
-- `redis/`: Pre-compiled Redis
-- `install.sh`: Environment setup script
-- `start.sh`: Service manager (start/stop/status)
+
+- `ckg/`: **Core Source Code** - Main Python package.
+- `data/`: **Data Storage** - Pre-loaded databases, experiments, and ontologies.
+- `neo4j/`: **Graph Database** - Pre-configured Neo4j 5.x installation.
+- `redis/`: **Cache** - Pre-compiled Redis server.
+- `scripts/`: **Utilities**
+    - `slurm/`: HPC job submission scripts.
+    - `utils/`: Maintenance scripts (e.g., database builders).
+- `docker/`: **Containerization** - Dockerfiles (Legacy/Development).
+- `legacy_files/`: **Archive** - Old scripts and deprecated tools.
+- `demo_queries.cypher`: **Examples** - Copy-pasteable Cypher queries for Neo4j.
 
 ## 🔧 Configuration
 The system is pre-configured. If you need to change ports or passwords:

@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """Update cypher.yml from Neo4j 4.x to Neo4j 5.x syntax"""
 import re
+from pathlib import Path
+
+CYPHER_FILE = Path(__file__).resolve().parents[2] / "ckg/graphdb_builder/builder/cypher.yml"
 
 # Read the file
-with open('./local-data', 'r') as f:
+with open(CYPHER_FILE, 'r') as f:
     content = f.read()
 
 # 1. Update CREATE CONSTRAINT syntax
@@ -39,7 +42,7 @@ content = re.sub(
 )
 
 # Write the updated file
-with open('./local-data', 'w') as f:
+with open(CYPHER_FILE, 'w') as f:
     f.write(content)
 
 print("Updated cypher.yml to Neo4j 5.x syntax:")

@@ -3,16 +3,33 @@ import numpy as np
 import yaml
 import json
 import logging
+import logging.config
+from pathlib import Path
 
 
 def read_ckg_config(key=None):
-    cwd = os.path.dirname(os.path.abspath(__file__))
-    config_file = os.path.join(cwd, 'config/ckg_config.yml')
-    content = read_yaml(config_file)
-    if key is not None:
-        if key in content:
-            return content[key]
+    """Resolve relative runtime paths against CKG_ROOT (the checkout by default).
 
+    CKG_CONFIG_FILE selects a deployment-specific YAML file. Absolute paths in
+    existing configurations remain unchanged.
+    """
+    package_dir = Path(__file__).resolve().parent
+    root = Path(os.environ.get('CKG_ROOT', package_dir.parent)).expanduser().resolve()
+    config_file = Path(os.environ.get('CKG_CONFIG_FILE', package_dir / 'config/ckg_config.yml'))
+    content = read_yaml(config_file.expanduser())
+    for name, value in content.items():
+        if isinstance(value, str) and (name.endswith('_directory') or name.endswith('_log')):
+            path = Path(value).expanduser()
+            if not path.is_absolute():
+                if name == 'ckg_directory':
+                    path = package_dir
+                elif name.endswith('_log'):
+                    path = package_dir.parent / path
+                else:
+                    path = root / path
+            content[name] = str(path)
+    if key is not None:
+        return content[key]
     return content
 
 
@@ -68,6 +85,13 @@ def setup_logging(path='log.config', key=None):
     if os.path.exists(path):
         with open(path, 'rt') as f:
             config = json.load(f)
+        for handler in config.get('handlers', {}).values():
+            if 'filename' in handler:
+                filename = Path(handler['filename']).expanduser()
+                if not filename.is_absolute():
+                    filename = Path(read_ckg_config('log_directory')) / filename
+                filename.parent.mkdir(parents=True, exist_ok=True)
+                handler['filename'] = str(filename)
         logging.config.dictConfig(config)
     else:
         logging.basicConfig(level=logging.DEBUG)

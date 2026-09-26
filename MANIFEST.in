@@ -1,1 +1,2 @@
-recursive-include ckg *
+include README.md requirements_modern.txt
+recursive-include ckg *.yml *.yaml *.config *.json *.html *.css *.js *.png *.jpg *.jpeg *.svg *.ico *.tsv *.txt

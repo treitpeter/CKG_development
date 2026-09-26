@@ -390,18 +390,7 @@ def setup_logging(path='log.config', key=None):
     :return: Logger with the specified name from 'key'. If key is *None*, returns a logger which is \
                 the root logger of the hierarchy.
     """
-    if os.path.exists(path):
-        with open(path, 'rt') as f:
-            config = json.load(f)
-        try:
-            logging.config.dictConfig(config)
-        except Exception:
-            logging.basicConfig(level=logging.DEBUG)
-    else:
-        logging.basicConfig(level=logging.DEBUG)
-    logger = logging.getLogger(key)
-
-    return logger
+    return ckg_utils.setup_logging(path, key=key)
 
 
 def download_from_ftp(ftp_url, user, password, to, file_name):

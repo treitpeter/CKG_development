@@ -16,4 +16,12 @@ log/
 .vscode/
 *.swp
 *.swo
-EOF
+
+.venv/
+.venv-*/
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+*.log
+run/

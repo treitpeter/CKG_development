@@ -1,24 +1,24 @@
 import sys
 import os
 import json
+import logging
 import neo4j
 import pandas as pd
 from ckg import ckg_utils
 from ckg.graphdb_builder import builder_utils
 
 
+logger = logging.getLogger(__name__)
+
+
 def read_config():
-    try:
-        ckg_config = ckg_utils.read_ckg_config()
-        cwd = os.path.dirname(os.path.abspath(__file__))
-        path = os.path.join(cwd, 'connector_config.yml')
-        config = ckg_utils.get_configuration(path)
-        log_config = ckg_config['graphdb_connector_log']
-        logger = builder_utils.setup_logging(log_config, key="connector")
-        
-        return config
-    except Exception as err:
-        logger.error("Reading configuration > {}.".format(err))
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'connector_config.yml')
+    config = ckg_utils.get_configuration(path)
+    for key in ('db_url', 'db_port', 'db_user', 'db_password'):
+        value = os.environ.get('CKG_' + key.upper())
+        if value is not None:
+            config[key] = int(value) if key == 'db_port' else value
+    return config
 
 
 def getGraphDatabaseConnectionConfiguration(configuration=None, database=None):
@@ -41,6 +41,7 @@ def getGraphDatabaseConnectionConfiguration(configuration=None, database=None):
 
 
 def connectToDB(host="localhost", port=7687, user="neo4j", password="password"):
+    driver = None
     try:
         uri = "bolt://{}:{}".format(host, port)
         driver = neo4j.GraphDatabase.driver(uri, auth=(user, password), encrypted=False)

@@ -1,5 +1,10 @@
 #!/bin/bash
-set -e
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+PYTHON="${PYTHON:-python3}"
+"$PYTHON" -c 'import sys; sys.exit(0 if sys.version_info >= (3, 10) else "Python 3.10+ required; set PYTHON to its executable.")'
 
 # Gemini alphaCKG Installer
 # Sets up Python, Neo4j, Redis, and directory structure.
@@ -11,22 +16,15 @@ echo "=============================================="
 # 1. Environment Setup
 echo "[1/4] Setting up Python environment..."
 if [ ! -d "venv" ]; then
-    python3 -m venv venv
+    "$PYTHON" -m venv venv
     echo "      Created venv."
 else
     echo "      venv exists."
 fi
 
 source venv/bin/activate
-pip install --upgrade pip wheel -q
-if [ -f "requirements_modern.txt" ]; then
-    echo "      Installing Python dependencies (this may take a few minutes)..."
-    pip install -r requirements_modern.txt -q
-    echo "      Python dependencies installed."
-else
-    echo "ERROR: requirements_modern.txt not found!"
-    exit 1
-fi
+python -m pip install --upgrade pip wheel
+python -m pip install -e .
 
 # 2. Redis Setup
 echo "[2/4] Verifying/Setting up Redis..."
@@ -37,7 +35,7 @@ REDIS_SERVER_PATH="$REDIS_DIR/redis-stable/src/redis-server"
 if [ ! -f "$REDIS_SERVER_PATH" ]; then
     echo "      Redis binary not found. Downloading and compiling Redis $REDIS_VER..."
     mkdir -p "$REDIS_DIR"
-    wget -qc http://download.redis.io/releases/redis-${REDIS_VER}.tar.gz -O redis.tar.gz
+    wget -qc https://download.redis.io/releases/redis-${REDIS_VER}.tar.gz -O redis.tar.gz
     tar xzf redis.tar.gz -C "$REDIS_DIR"
     if [ -d "$REDIS_DIR/redis-${REDIS_VER}" ]; then
         mv "$REDIS_DIR/redis-${REDIS_VER}" "$REDIS_DIR/redis-stable"
@@ -60,6 +58,11 @@ NEO4J_DIR="neo4j"
 NEO4J_HOME="$NEO4J_DIR/neo4j-community-${NEO4J_VER}"
 
 if [ ! -d "$NEO4J_HOME" ]; then
+    DB_PASSWORD=$(python -c 'from ckg.graphdb_connector.connector import read_config; print(read_config()["db_password"])')
+    if [[ ${#DB_PASSWORD} -lt 8 ]]; then
+        echo "Set CKG_DB_PASSWORD to a deployment-specific password of at least 8 characters." >&2
+        exit 1
+    fi
     echo "      Neo4j installation not found. Downloading and configuring Neo4j Community $NEO4J_VER..."
     mkdir -p "$NEO4J_DIR"
     wget -qc "https://neo4j.com/artifact.php?name=neo4j-community-${NEO4J_VER}-unix.tar.gz" -O neo4j.tar.gz
@@ -70,8 +73,6 @@ if [ ! -d "$NEO4J_HOME" ]; then
     echo "      Configuring Neo4j..."
     CONF="$NEO4J_HOME/conf/neo4j.conf"
     
-    # Allow remote access
-    sed -i 's/#server.default_listen_address=0.0.0.0/server.default_listen_address=0.0.0.0/' "$CONF"
     
     # Increase memory
     echo "" >> "$CONF"
@@ -83,47 +84,24 @@ if [ ! -d "$NEO4J_HOME" ]; then
     # Allow imports from anywhere (comment out restriction)
     sed -i 's/server.directories.import=import/#server.directories.import=import/' "$CONF"
     
+    # Initialize authentication only for a newly downloaded database.
+    "$NEO4J_HOME/bin/neo4j-admin" dbms set-initial-password "$DB_PASSWORD"
     echo "      Neo4j installed and configured."
 else
     echo "      Neo4j installation found. Skipping download."
-    # Ensure config is applied if not already
-    CONF="$NEO4J_HOME/conf/neo4j.conf"
-    if ! grep -q "server.default_listen_address=0.0.0.0" "$CONF"; then
-        echo "      Applying Neo4j configuration for pre-existing install..."
-        sed -i 's/#server.default_listen_address=0.0.0.0/server.default_listen_address=0.0.0.0/' "$CONF"
-        echo "" >> "$CONF"
-        echo "# alphaCKG Optimizations" >> "$CONF"
-        echo "server.memory.heap.initial_size=2g" >> "$CONF"
-        echo "server.memory.heap.max_size=8g" >> "$CONF"
-        echo "server.memory.pagecache.size=4g" >> "$CONF"
-        sed -i 's/server.directories.import=import/#server.directories.import=import/' "$CONF"
-    fi
+
 fi
 
 # 4. CKG Configuration
 echo "[4/4] Initializing CKG Configuration and Directories..."
-# Ensure config file exists
-if [ ! -f "ckg/graphdb_connector/connector_config.yml" ]; then
-    echo "      Creating default connector_config.yml..."
-    cat > ckg/graphdb_connector/connector_config.yml <<EOF
-db_url: "localhost"
-db_port: 7687
-db_user: "neo4j"
-db_password: ""
-EOF
-else
-    echo "      ckg/graphdb_connector/connector_config.yml already exists."
-    # Ensure default password is set for pre-existing, if not using a specific one.
-    # This might overwrite user's password if they changed it manually.
-    # For a "batteries-included" internal setup, this is probably fine if the boss knows it's temporary/default.
-    sed -i 's/db_password: ".*/db_password: "REDACTED_SET_LOCALLY"/' ckg/graphdb_connector/connector_config.yml
-fi
-
-# Create data directories if they don't exist (important for pre-loaded data)
-mkdir -p data/databases
-mkdir -p data/imports
-mkdir -p data/ontologies
-mkdir -p log
+# Preserve connector credentials and deployment configuration.
+python - <<'PYTHON'
+from pathlib import Path
+from ckg import ckg_utils
+for key, value in ckg_utils.read_ckg_config().items():
+    if key.endswith('_directory'):
+        Path(value).mkdir(parents=True, exist_ok=True)
+PYTHON
 
 # Finalize
 echo ""

@@ -2,7 +2,7 @@
 # Updated for 2025/2026 compatibility
 
 # Core data handling
-pandas>=2.1.0
+pandas>=2.1.0,<3
 numpy>=1.26.0,<2.0.0
 scipy>=1.11.0
 
@@ -11,7 +11,7 @@ neo4j>=5.14.0
 
 # Web framework & dashboard
 Flask>=3.0.0
-dash>=2.14.0
+dash>=2.14.0,<4
 plotly>=5.18.0
 dash-cytoscape>=0.3.0
 
@@ -66,3 +66,18 @@ ipykernel>=6.27.0
 # Documentation (optional)
 # sphinx>=7.0.0
 # nbsphinx>=0.9.0
+
+# Imported by graph builders, analytics and report rendering
+wget>=3.2
+rarfile>=4.2
+snfpy>=0.2.2
+kmapper>=2.1.0
+combat>=0.3.3
+pyvis>=0.3.2
+webweb>=0.0.37
+chart-studio>=1.1.0
+nltk>=3.9.2
+seaborn>=0.13
+certifi
+urllib3
+joblib

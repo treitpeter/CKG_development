@@ -1,12 +1,13 @@
 #!/usr/bin/env python3 -u
 """
-CKG_PeTr - Graceful Database Builder
+CKG - Graceful Database Builder
 Downloads and processes all databases with individual error handling.
 If one database fails, continues with the rest.
 """
 
 import os
 import sys
+from pathlib import Path
 import traceback
 from datetime import datetime
 
@@ -14,9 +15,10 @@ from datetime import datetime
 sys.stdout.reconfigure(line_buffering=True)
 sys.stderr.reconfigure(line_buffering=True)
 
-# Setup path
-sys.path.insert(0, './local-data')
-os.chdir('./local-data')
+# Locate the checkout independently of the current working directory.
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+os.chdir(ROOT)
 
 from ckg import ckg_utils
 from ckg.graphdb_builder import builder_utils
@@ -168,7 +170,7 @@ def load_to_neo4j():
 
 def main():
     log_status("=" * 60)
-    log_status("CKG_PeTr GRACEFUL DATABASE BUILD")
+    log_status("CKG GRACEFUL DATABASE BUILD")
     log_status("=" * 60)
     log_status("")
     log_status("This will download ~80GB of biomedical data from:")

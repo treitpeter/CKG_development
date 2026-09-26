@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-CKG_PeTr - Comprehensive Test Suite
+CKG - Comprehensive Test Suite
 Run with: PYTHONPATH=. python3 test_ckg.py
 """
 
@@ -20,7 +20,7 @@ class Colors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
 
-def test_module(module_name):
+def check_module(module_name):
     """Test if a module can be imported"""
     try:
         importlib.import_module(module_name)
@@ -30,7 +30,7 @@ def test_module(module_name):
 
 def run_tests():
     print(f"\n{Colors.BOLD}{'='*70}")
-    print("CKG_PeTr - Comprehensive Test Suite")
+    print("CKG - Comprehensive Test Suite")
     print(f"{'='*70}{Colors.ENDC}\n")
 
     results = {
@@ -119,7 +119,7 @@ def run_tests():
         print(f"{Colors.BLUE}{Colors.BOLD}{category}{Colors.ENDC}")
 
         for module in modules:
-            success, error = test_module(module)
+            success, error = check_module(module)
             short_name = module.split('.')[-1]
 
             if success:
@@ -159,6 +159,7 @@ def run_tests():
         df2 = pd.concat([df, df], ignore_index=True)  # Modern pandas
         print(f"  {Colors.GREEN}[OK]{Colors.ENDC} Pandas concat operations")
     except Exception as e:
+        results["failed"] += 1
         print(f"  {Colors.RED}[FAIL]{Colors.ENDC} Pandas operations: {e}")
 
     # Test dash imports
@@ -166,6 +167,7 @@ def run_tests():
         from dash import html, dcc
         print(f"  {Colors.GREEN}[OK]{Colors.ENDC} Dash modern imports")
     except Exception as e:
+        results["failed"] += 1
         print(f"  {Colors.RED}[FAIL]{Colors.ENDC} Dash imports: {e}")
 
     # Test neo4j driver
@@ -173,6 +175,7 @@ def run_tests():
         import neo4j
         print(f"  {Colors.GREEN}[OK]{Colors.ENDC} Neo4j driver (v{neo4j.__version__})")
     except Exception as e:
+        results["failed"] += 1
         print(f"  {Colors.RED}[FAIL]{Colors.ENDC} Neo4j driver: {e}")
 
     # Test analytics
@@ -182,6 +185,7 @@ def run_tests():
         import umap
         print(f"  {Colors.GREEN}[OK]{Colors.ENDC} ML libraries (sklearn, umap)")
     except Exception as e:
+        results["failed"] += 1
         print(f"  {Colors.RED}[FAIL]{Colors.ENDC} ML libraries: {e}")
 
     # Test visualization
@@ -191,6 +195,7 @@ def run_tests():
         import matplotlib
         print(f"  {Colors.GREEN}[OK]{Colors.ENDC} Visualization (plotly, networkx, matplotlib)")
     except Exception as e:
+        results["failed"] += 1
         print(f"  {Colors.RED}[FAIL]{Colors.ENDC} Visualization: {e}")
 
     print(f"\n{Colors.BOLD}{'='*70}{Colors.ENDC}")

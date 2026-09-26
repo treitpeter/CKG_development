@@ -1,5 +1,8 @@
 import urllib
+import pytest
 from ckg.graphdb_builder import builder_utils
+
+pytestmark = pytest.mark.network
 
 class TestParsersClass:
     def get_url_response(self, url):

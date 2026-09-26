@@ -2,6 +2,8 @@ import warnings
 import os
 import shutil
 import subprocess
+import sys
+import signal
 import re
 import pandas as pd
 import numpy as np
@@ -395,12 +397,12 @@ def generate_report_url(n_clicks, pathname):
 @application.route('/downloads/<value>')
 def route_report_url(value):
     uri = os.path.join(ckg_config['downloads_directory'], value + '.zip')
-    return flask.send_file(uri, attachment_filename=value + '.zip', as_attachment=True, cache_timeout=-1)
+    return flask.send_file(uri, download_name=value + '.zip', as_attachment=True, max_age=0)
 
 @application.route('/example_files')
 def route_example_files_url():
     uri = os.path.join(ckg_config['data_directory'], 'example_files.zip')
-    return flask.send_file(uri, attachment_filename='example_files.zip', as_attachment=True, cache_timeout=-1)
+    return flask.send_file(uri, download_name='example_files.zip', as_attachment=True, max_age=0)
 
 ###Callback regenerate project
 @app.callback(Output('regenerate', 'href'),
@@ -534,7 +536,7 @@ def serve_static(value):
     if not os.path.isfile(url):
         utils.compress_directory(filename, os.path.join(directory, 'files'), compression_format='zip')
 
-    return flask.send_file(url, attachment_filename = value+'.zip', as_attachment = True, cache_timeout=-1)
+    return flask.send_file(url, download_name=value+'.zip', as_attachment=True, max_age=0)
 
 
 ###Callbacks for data upload app
@@ -808,20 +810,34 @@ def route_upload_url(value):
     filename = os.path.join(directory, 'Uploaded_files_'+project_id)
     url = filename+'.zip'
 
-    return flask.send_file(url, attachment_filename = filename.split('/')[-1]+'.zip', as_attachment = True, cache_timeout=-1)
+    return flask.send_file(url, download_name=filename.split('/')[-1]+'.zip', as_attachment=True, max_age=0)
 
 def main():
-    print("IN MAIN")
-    celery_working_dir = os.path.dirname(os.path.abspath(__file__))
-    os.chdir(celery_working_dir)
     queues = [('creation', 1, 'INFO'), ('compute', 3, 'INFO'), ('update', 1, 'INFO')]
-    for queue, processes, log_level in queues:
-        celery_cmdline = 'celery -A ckg.report_manager.worker worker --loglevel={} --concurrency={} -E -Q {}'.format(log_level, processes, queue).split(" ")
-        print("Ready to call {} ".format(celery_cmdline))
-        subprocess.Popen(celery_cmdline)
-        print("Done callling {} ".format(celery_cmdline))
-    
-    application.run(debug=False, host='0.0.0.0')  
+    workers = []
+
+    def shutdown(signum, frame):
+        raise SystemExit(0)
+
+    previous_handler = signal.signal(signal.SIGTERM, shutdown)
+    try:
+        for queue, processes, log_level in queues:
+            command = [sys.executable, '-m', 'celery', '-A',
+                       'ckg.report_manager.worker', 'worker',
+                       '--loglevel=' + log_level, '--concurrency=' + str(processes),
+                       '-E', '-Q', queue]
+            workers.append(subprocess.Popen(command))
+        application.run(debug=False, host='127.0.0.1', port=5000)
+    finally:
+        for worker in workers:
+            worker.terminate()
+        for worker in workers:
+            try:
+                worker.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                worker.kill()
+                worker.wait()
+        signal.signal(signal.SIGTERM, previous_handler)
 
 
 if __name__ == '__main__':

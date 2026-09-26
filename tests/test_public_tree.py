@@ -11,6 +11,7 @@ PRIVATE_PATTERNS = [
     re.compile(rb'/(?:fs/(?:gpfs[^/\s]*|pool)|Users|home)/[^\s"\x27<>]+'),
     re.compile(rb'gh[pousr]_[A-Za-z0-9]{30,}'),
     re.compile(rb'-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----'),
+    re.compile(rb'https?://datashare\.[a-z.]+/s/[A-Za-z0-9]+'),
 ]
 
 

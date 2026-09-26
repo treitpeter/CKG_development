@@ -250,8 +250,10 @@ This will start a partial update of the Publication nodes and their relationship
 Building CKG's Graph Database from a Dump File
 =================================================
 
-A dump file of the database is also made available in this `link <https://example.org/removed-legacy-download/download>`__ and alternatively, you can use it to load the graph database contained in it. 
-To do so, download the dump file ``ckg_latest_4.2.3.dump`` and also ``data.zip`` from this `link <https://example.org/removed-legacy-download/download>, which contains some nodes and relationships associated to the licensed databases.
+Obtain a database dump from your own deployment or a source you are authorized
+to use. This repository does not distribute database dumps or licensed source
+data. Check the dump's Neo4j version before restoring it. The commands below
+are historical Neo4j 4 examples, not commands for the current Neo4j 5 installer.
 
 The ``.dump`` file will be used to load the Neo4j graph database:
 
